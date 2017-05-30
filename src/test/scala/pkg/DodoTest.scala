@@ -27,7 +27,9 @@ class DodoTest extends FunSuite {
   test("it manages crawlers") {
     val crawler = new DodoCrawler("http://www.kovarik-revize-praha.cz/", "http://www.kovarik-revize-praha.cz", "Lhůty")
     val result = crawler.run
-    assertEquals(Set("http://www.kovarik-revize-praha.cz/"), result)
+    assertEquals("number of results", 26, result.size)
+    assertTrue("has a known URL", result.contains("http://www.kovarik-revize-praha.cz/"))
+    assertTrue("has another known URL", result.contains("http://www.kovarik-revize-praha.cz/?elektro-revize-hromosvodu,19"))
   }
 
 }

@@ -1,6 +1,8 @@
 
 package pkg
 
+import java.net.URL
+
 import sys.process._
 
 class PageCrawler(url: String, needle: String) {
@@ -13,11 +15,7 @@ class PageCrawler(url: String, needle: String) {
     CrawlResult(matches, urls)
   }
 
-  private def absolute(u : String) = if (hasProtocol(u)) u else
-    if (u.startsWith("?") && url.contains("?")) url.substring(url.indexOf("?"))+u else
-    if (u.startsWith("#") && url.contains("#")) url.substring(url.indexOf("#"))+u else
-    if (u == "./") url else
-    url+u
+  private def absolute(u : String) = if (hasProtocol(u)) u else new URL(new URL(url),u).toString   
 
   private def acceptable(u : String) = hasAcceptableProtocol(u)
 
